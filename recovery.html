@@ -9,6 +9,7 @@
         .card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; width: 100%; max-width: 400px; }
         input { padding: 12px; width: 90%; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px; }
         button { background-color: #007bff; color: white; border: none; padding: 14px 28px; border-radius: 6px; font-weight: bold; width: 95%; cursor: pointer; font-size: 16px; }
+        button:disabled { background-color: #ccc; }
         #status { margin-top: 15px; font-weight: bold; font-size: 14px; }
     </style>
 </head>
@@ -26,6 +27,7 @@
         const SB_URL = "https://kykbnqqdfhzzdtkpdwuy.supabase.co";
         const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5a2JucXFkZmh6emR0a3Bkd3V5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNTc4MjksImV4cCI6MjA4ODkzMzgyOX0.jI7cburkLgjE2dtovKS4SSLrUNyzHA0Q8IubdYYu_a8";
         
+        // Inicializamos el cliente globalmente para que esté listo
         const supabase = supabasejs.createClient(SB_URL, SB_KEY, {
             auth: { persistSession: false }
         });
@@ -42,41 +44,16 @@
             }
 
             btn.disabled = true;
-            btn.innerText = "PROCESANDO...";
+            btn.innerText = "ACTUALIZANDO...";
+            status.innerText = "Validando acceso...";
+            status.style.color = "#666";
 
             try {
-                // Capturar el hash actual de la URL
+                // Forzar lectura del token del Hash
                 const hash = window.location.hash.substring(1);
                 const params = new URLSearchParams(hash);
                 const accessToken = params.get("access_token");
                 const refreshToken = params.get("refresh_token");
 
-                if (accessToken) {
-                    await supabase.auth.setSession({
-                        access_token: accessToken,
-                        refresh_token: refreshToken
-                    });
-                }
-
-                const { error } = await supabase.auth.updateUser({ password: password });
-
-                if (error) {
-                    status.innerText = "❌ Error: " + error.message;
-                    status.style.color = "red";
-                    btn.disabled = false;
-                    btn.innerText = "REINTENTAR";
-                } else {
-                    status.innerText = "✅ ¡Contraseña cambiada!";
-                    status.style.color = "green";
-                    btn.style.display = "none";
-                    document.getElementById('passInput').style.display = "none";
-                }
-            } catch (err) {
-                status.innerText = "❌ Error de conexión.";
-                status.style.color = "red";
-                btn.disabled = false;
-            }
-        };
-    </script>
-</body>
-</html>
+                if (!accessToken) {
+                    throw new Error
