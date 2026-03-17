@@ -25,6 +25,13 @@
     </div>
 
     <script>
+        // --- POLICÍA DE TRÁFICO (ENRUTADOR) ---
+        const urlHash = window.location.hash;
+        if (urlHash.includes("type=signup")) {
+            // Si viene de confirmar cuenta, lo enviamos a la bienvenida
+            window.location.replace("https://app.hiveutilsproai.com/welcome.html");
+        }
+        // --------------------------------------
         const SB_URL = "https://kykbnqqdfhzzdtkpdwuy.supabase.co";
         const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5a2JucXFkZmh6emR0a3Bkd3V5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNTc4MjksImV4cCI6MjA4ODkzMzgyOX0.jI7cburkLgjE2dtovKS4SSLrUNyzHA0Q8IubdYYu_a8"; 
 
