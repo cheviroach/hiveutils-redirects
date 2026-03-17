@@ -1,20 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Cargando...</title>
     <script>
-        const hash = window.location.hash;
-        if (hash.includes("type=signup")) {
-            // Es un registro nuevo -> Bienvenida
-            window.location.replace("https://app.hiveutilsproai.com/welcome.html" + hash);
-        } else if (hash.includes("type=recovery")) {
-            // Es una recuperación -> Nueva página de password
-            window.location.replace("https://app.hiveutilsproai.com/recovery.html" + hash);
-        } else {
-            // Por si acaso, si no hay nada, mandarlo a bienvenida o pagos
-            window.location.replace("https://app.hiveutilsproai.com/welcome.html");
+        // Función de redirección mejorada
+        function redireccionar() {
+            const hash = window.location.hash;
+            console.log("Hash detectado:", hash);
+
+            if (hash.includes("type=signup")) {
+                console.log("Es un registro. Enviando a Welcome...");
+                window.location.replace("https://app.hiveutilsproai.com/welcome.html" + hash);
+            } 
+            else if (hash.includes("type=recovery") || hash.includes("access_token")) {
+                console.log("Es una recuperación. Enviando a Recovery...");
+                window.location.replace("https://app.hiveutilsproai.com/recovery.html" + hash);
+            }
+            else {
+                // Si NO hay nada en la URL, que no haga nada o muestre un mensaje
+                document.body.innerHTML = "<h2>Acceso no válido. Por favor, usa el enlace de tu correo.</h2>";
+            }
         }
+
+        // Ejecutar inmediatamente
+        window.onload = redireccionar;
     </script>
 </head>
-<body>
+<body style="font-family: sans-serif; text-align: center; padding-top: 50px;">
+    <p>Redirigiendo, por favor espera...</p>
 </body>
 </html>
