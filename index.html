@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    // --- ENRUTADOR MAESTRO (SOLUCIÓN DEFINITIVA) ---
+        const hashContent = window.location.hash;
+        
+        // Buscamos 'type=signup' específicamente dentro del texto largo del hash
+        if (hashContent.includes("type=signup")) {
+            console.log("Detectado registro nuevo. Redirigiendo...");
+            window.location.replace("https://app.hiveutilsproai.com/welcome.html" + hashContent);
+        }
+        // -----------------------------------------------
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nueva Contraseña | HiveUtils Pro AI</title>
@@ -25,15 +34,7 @@
     </div>
 
     <script>
-        // --- ENRUTADOR MAESTRO (SOLUCIÓN DEFINITIVA) ---
-        const hashContent = window.location.hash;
         
-        // Buscamos 'type=signup' específicamente dentro del texto largo del hash
-        if (hashContent.includes("type=signup")) {
-            console.log("Detectado registro nuevo. Redirigiendo...");
-            window.location.replace("https://app.hiveutilsproai.com/welcome.html" + hashContent);
-        }
-        // -----------------------------------------------
         const SB_URL = "https://kykbnqqdfhzzdtkpdwuy.supabase.co";
         const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5a2JucXFkZmh6emR0a3Bkd3V5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNTc4MjksImV4cCI6MjA4ODkzMzgyOX0.jI7cburkLgjE2dtovKS4SSLrUNyzHA0Q8IubdYYu_a8"; 
 
