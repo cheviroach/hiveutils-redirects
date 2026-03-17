@@ -9,171 +9,156 @@
         :root {
             --gold: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
             --dark-premium: #1a1a1a;
-            --soft-gray: #f8fafc;
+            --soft-gray: #f4f7f9;
         }
 
         body {
-            font-family: 'Inter', -apple-system, sans-serif;
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
             background-color: var(--soft-gray);
             margin: 0;
-            padding: 40px 20px;
+            padding: 40px 10px;
             color: #333;
         }
 
         .header-section {
             text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .header-section h1 {
-            font-size: 36px;
-            margin-bottom: 10px;
-            font-weight: 800;
+            margin-bottom: 40px;
         }
 
         .pro-badge {
             background: var(--gold);
             color: white;
-            padding: 4px 12px;
-            border-radius: 8px;
-            font-size: 18px;
+            padding: 2px 10px;
+            border-radius: 6px;
+            font-size: 0.6em;
+            vertical-align: middle;
         }
 
-        /* Email Input Superior */
-        .email-box {
-            max-width: 400px;
-            margin: 0 auto 40px;
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border: 1px solid #e2e8f0;
+        /* Input de Correo Elegante */
+        .email-container {
+            max-width: 450px;
+            margin: 0 auto 50px;
+            text-align: center;
         }
 
-        .email-box label {
+        .email-container label {
             display: block;
-            font-weight: 600;
-            margin-bottom: 8px;
-            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #4a5568;
         }
 
-        input[type="email"] {
+        #email_main {
             width: 100%;
-            padding: 12px;
-            border: 2px solid #edf2f7;
-            border-radius: 10px;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
             font-size: 16px;
             box-sizing: border-box;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
         }
 
-        input:focus {
+        #email_main:focus {
             outline: none;
             border-color: #ffb100;
-            background: #fffdf5;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(255, 177, 0, 0.15);
         }
 
-        /* Grid de Tarjetas */
+        /* Grid de 4 Columnas */
         .pricing-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 25px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 10px;
         }
 
         .card {
             background: white;
             border-radius: 24px;
-            padding: 35px;
-            width: 280px;
+            padding: 30px 20px;
             text-align: center;
             position: relative;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.3s ease;
             border: 1px solid #e2e8f0;
             display: flex;
             flex-direction: column;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.03);
         }
 
         .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.08);
         }
 
+        /* Resaltado del Plan Anual */
         .card.popular {
-            border: 2.5px solid #ffb100;
-            transform: scale(1.05);
-            z-index: 10;
+            border: 2px solid #ffb100;
+            background: #fffdf5;
         }
 
-        .card.popular:hover {
-            transform: scale(1.05) translateY(-10px);
-        }
-
-        .popular-label {
+        .popular-tag {
             position: absolute;
-            top: -15px;
+            top: -12px;
             left: 50%;
             transform: translateX(-50%);
             background: var(--gold);
             color: white;
-            padding: 5px 20px;
+            padding: 4px 15px;
             border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
+            font-size: 11px;
+            font-weight: 800;
             text-transform: uppercase;
         }
 
         .plan-name {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
-            color: #64748b;
+            color: #718096;
             text-transform: uppercase;
             letter-spacing: 1px;
+            margin-bottom: 10px;
         }
 
         .plan-price {
-            font-size: 48px;
+            font-size: 42px;
             font-weight: 800;
-            margin: 15px 0;
-            color: var(--dark-premium);
+            margin-bottom: 5px;
+            color: #1a202c;
         }
 
-        .plan-price span {
-            font-size: 16px;
-            font-weight: 400;
-            color: #94a3b8;
-        }
+        .plan-price span { font-size: 16px; color: #a0aec0; font-weight: 400; }
 
-        .plan-days {
-            background: #f1f5f9;
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 600;
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-
-        .save-badge {
-            color: #10b981;
-            font-weight: 700;
+        .plan-info {
             font-size: 14px;
-            margin-bottom: 20px;
+            color: #4a5568;
+            margin-bottom: 15px;
+            font-weight: 500;
         }
 
-        /* Botones de Pago */
-        .paypal-container {
+        .save-label {
+            color: #38a169;
+            font-weight: 700;
+            font-size: 13px;
+            margin-bottom: 25px;
+            min-height: 18px;
+        }
+
+        .paypal-slot {
             margin-top: auto;
-            min-height: 100px;
+            min-height: 150px;
         }
 
-        .error-msg {
-            color: #ef4444;
-            font-size: 12px;
-            margin-top: 5px;
+        #email_error {
+            color: #e53e3e;
+            font-size: 13px;
+            margin-top: 10px;
             display: none;
+            font-weight: 600;
         }
     </style>
 </head>
@@ -181,84 +166,96 @@
 
 <div class="header-section">
     <h1>HiveUtils <span class="pro-badge">PRO</span></h1>
-    <p>Elige la llave que desbloquea tu productividad máxima.</p>
+    <p>Selecciona el plan que mejor se adapte a tus necesidades</p>
 </div>
 
-<div class="email-box">
-    <label>1. Ingresa tu correo de cuenta:</label>
-    <input type="email" id="email_main" placeholder="usuario@correo.com">
-    <div id="email_error" class="error-msg">⚠️ Necesitamos un correo válido para activar tu cuenta.</div>
+<div class="email-container">
+    <label for="email_main">1. Tu correo registrado en HiveUtils:</label>
+    <input type="email" id="email_main" placeholder="ejemplo@correo.com" required>
+    <div id="email_error">⚠️ Introduce un correo válido para continuar</div>
 </div>
 
 <div class="pricing-grid">
     <div class="card">
         <div class="plan-name">Mensual</div>
         <div class="plan-price">$4<span>/mes</span></div>
-        <div class="plan-days">30 Días de Acceso</div>
-        <div class="save-badge">Plan Básico</div>
-        <div id="btn-1m" class="paypal-container"></div>
+        <div class="plan-info">30 Días de Acceso</div>
+        <div class="save-label">Acceso Total</div>
+        <div id="btn-1m" class="paypal-slot"></div>
     </div>
 
     <div class="card">
         <div class="plan-name">Trimestral</div>
-        <div class="plan-price">$10<span>/total</span></div>
-        <div class="plan-days">90 Días de Acceso</div>
-        <div class="save-badge">Ahorras $2 USD</div>
-        <div id="btn-3m" class="paypal-container"></div>
+        <div class="plan-price">$10<span>/3m</span></div>
+        <div class="plan-info">90 Días de Acceso</div>
+        <div class="save-label">Ahorras $2 USD</div>
+        <div id="btn-3m" class="paypal-slot"></div>
+    </div>
+
+    <div class="card">
+        <div class="plan-name">Semestral</div>
+        <div class="plan-price">$18<span>/6m</span></div>
+        <div class="plan-info">180 Días de Acceso</div>
+        <div class="save-label">Ahorras $6 USD</div>
+        <div id="btn-6m" class="paypal-slot"></div>
     </div>
 
     <div class="card popular">
-        <div class="popular-label">Mejor Valor</div>
+        <div class="popular-tag">¡Más Ahorro!</div>
         <div class="plan-name">Anual</div>
         <div class="plan-price">$30<span>/año</span></div>
-        <div class="plan-days">365 Días de Acceso</div>
-        <div class="save-badge">¡Ahorras $18 USD! (4.5 meses gratis)</div>
-        <div id="btn-1y" class="paypal-container"></div>
+        <div class="plan-info">365 Días de Acceso</div>
+        <div class="save-label">Ahorras $18 USD</div>
+        <div id="btn-1y" class="paypal-slot"></div>
     </div>
 </div>
 
 <script>
-    function getEmail() {
+    function validateAndGetEmail() {
         const email = document.getElementById('email_main').value.trim();
-        const err = document.getElementById('email_error');
-        if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            err.style.display = 'block';
-            document.getElementById('email_main').focus();
+        const error = document.getElementById('email_error');
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        
+        if(!regex.test(email)) {
+            error.style.display = 'block';
+            document.getElementById('email_main').style.borderColor = '#e53e3e';
             return null;
         }
-        err.style.display = 'none';
+        error.style.display = 'none';
+        document.getElementById('email_main').style.borderColor = '#38a169';
         return email;
     }
 
     const planes = [
-        { id: 'btn-1m', monto: "4.00", desc: "1 Mes PRO" },
-        { id: 'btn-3m', monto: "10.00", desc: "3 Meses PRO" },
-        { id: 'btn-1y', monto: "30.00", desc: "1 Año PRO Elite" }
+        { container: 'btn-1m', val: '4.00', label: '1 Mes' },
+        { container: 'btn-3m', val: '10.00', label: '3 Meses' },
+        { container: 'btn-6m', val: '18.00', label: '6 Meses (180 días)' },
+        { container: 'btn-1y', val: '30.00', label: '1 Año (365 días)' }
     ];
 
-    planes.forEach(plan => {
+    planes.forEach(p => {
         paypal.Buttons({
-            style: { layout: 'vertical', color: 'gold', shape: 'pill', label: 'pay' },
+            style: { shape: 'pill', color: 'gold', layout: 'vertical', label: 'pay' },
             onClick: function(data, actions) {
-                return getEmail() ? actions.resolve() : actions.reject();
+                return validateAndGetEmail() ? actions.resolve() : actions.reject();
             },
             createOrder: function(data, actions) {
                 return actions.order.create({
                     purchase_units: [{
-                        amount: { value: plan.monto, currency_code: 'USD' },
-                        description: `HiveUtils PRO - ${plan.desc}`,
-                        custom_id: getEmail(),
+                        amount: { value: p.val, currency_code: 'USD' },
+                        description: "HiveUtils PRO: " + p.label,
+                        custom_id: validateAndGetEmail(),
                         payee: { email_address: "cheviroach_001-rujanojose@yahoo.com" }
                     }]
                 });
             },
             onApprove: function(data, actions) {
-                return actions.order.capture().then(function() {
-                    alert("¡Gracias por tu compra! Tu cuenta " + getEmail() + " se activará en breve.");
+                return actions.order.capture().then(function(details) {
+                    alert("¡Pago exitoso para " + validateAndGetEmail() + "! Tu cuenta será activada.");
                     location.reload();
                 });
             }
-        }).render('#' + plan.id);
+        }).render('#' + p.container);
     });
 </script>
 
