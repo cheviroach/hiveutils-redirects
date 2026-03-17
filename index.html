@@ -2,17 +2,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <script>
-        // ENRUTADOR CORREGIDO (Sin la "L" extra
-        if (window.location.hash.includes("type=signup")) {
-            window.location.replace("https://app.hiveutilsproai.com/welcome.html");
-        }
-    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nueva Contraseña | HiveUtils Pro AI</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nueva Contraseña | HiveUtils Pro AI</title>
+    <title>Gestión de Cuenta | HiveUtils Pro AI</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         body { font-family: 'Segoe UI', sans-serif; background-color: #f4f7f6; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
@@ -24,7 +15,8 @@
     </style>
 </head>
 <body>
-    <div class="card">
+
+    <div class="card" id="recoveryCard">
         <h2 style="color: #333; margin-top: 0;">Restablecer Contraseña</h2>
         <p style="color: #666; font-size: 14px; margin-bottom: 25px;">Ingresa tu nueva clave segura para HiveUtils Pro AI.</p>
         
@@ -34,12 +26,17 @@
     </div>
 
     <script>
-        
+        // 1. ENRUTADOR INMEDIATO
+        if (window.location.hash.includes("type=signup")) {
+            window.location.replace("https://app.hiveutilsproai.com/welcome.html");
+        }
+
+        // 2. CONFIGURACIÓN DE SUPABASE
         const SB_URL = "https://kykbnqqdfhzzdtkpdwuy.supabase.co";
         const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5a2JucXFkZmh6emR0a3Bkd3V5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNTc4MjksImV4cCI6MjA4ODkzMzgyOX0.jI7cburkLgjE2dtovKS4SSLrUNyzHA0Q8IubdYYu_a8"; 
-
         const supabase = supabasejs.createClient(SB_URL, SB_KEY);
 
+        // 3. LÓGICA DEL BOTÓN
         document.getElementById('saveBtn').onclick = async () => {
             const btn = document.getElementById('saveBtn');
             const status = document.getElementById('status');
@@ -55,18 +52,24 @@
             btn.innerText = "PROCESANDO...";
             status.innerText = "";
 
-            const { error } = await supabase.auth.updateUser({ password: password });
+            try {
+                const { error } = await supabase.auth.updateUser({ password: password });
 
-            if (error) {
-                status.innerText = "Error: El enlace expiró o es inválido. Pide uno nuevo.";
+                if (error) {
+                    status.innerText = "Error: El enlace expiró o es inválido.";
+                    status.style.color = "red";
+                    btn.disabled = false;
+                    btn.innerText = "REINTENTAR";
+                } else {
+                    status.innerText = "✅ ¡Éxito! Contraseña cambiada.";
+                    status.style.color = "green";
+                    btn.style.display = "none";
+                    document.getElementById('passInput').style.display = "none";
+                }
+            } catch (err) {
+                status.innerText = "Error de conexión. Intenta de nuevo.";
                 status.style.color = "red";
                 btn.disabled = false;
-                btn.innerText = "REINTENTAR";
-            } else {
-                status.innerText = "✅ ¡Éxito! Tu contraseña ha sido cambiada.";
-                status.style.color = "green";
-                btn.style.display = "none";
-                document.getElementById('passInput').style.display = "none";
             }
         };
     </script>
