@@ -1,29 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nueva Contraseña | HiveUtils</title>
-    <style>
-        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f7f6; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; width: 100%; max-width: 400px; }
-        input { padding: 12px; width: 90%; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px; }
-        button { background-color: #007bff; color: white; border: none; padding: 14px 28px; border-radius: 6px; font-weight: bold; width: 95%; cursor: pointer; font-size: 16px; transition: 0.3s; }
-        button:disabled { background-color: #ccc; cursor: not-allowed; }
-        #status { margin-top: 15px; font-weight: bold; font-size: 14px; }
-    </style>
-</head>
-<body>
-
-    <div class="card">
-        <h3 style="color: #333;">Establecer Nueva Contraseña</h3>
-        <input type="password" id="passInput" placeholder="Mínimo 6 caracteres">
-        <br>
-        <button id="saveBtn">ACTUALIZAR AHORA</button>
-        <p id="status"></p>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
         const SB_URL = "https://kykbnqqdfhzzdtkpdwuy.supabase.co";
         const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5a2JucXFkZmh6emR0a3Bkd3V5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNTc4MjksImV4cCI6MjA4ODkzMzgyOX0.jI7cburkLgjE2dtovKS4SSLrUNyzHA0Q8IubdYYu_a8";
@@ -34,37 +9,37 @@
             const password = document.getElementById('passInput').value;
 
             if (password.length < 6) {
-                status.innerText = "❌ La contraseña es muy corta";
+                status.innerText = "❌ Mínimo 6 caracteres";
                 status.style.color = "red";
                 return;
             }
 
             btn.disabled = true;
-            btn.innerText = "ENVIANDO DATOS...";
+            btn.innerText = "ACTUALIZANDO...";
             status.style.color = "#666";
-            status.innerText = "Comunicando con el servidor...";
+            status.innerText = "Validando sesión...";
 
             try {
-                // 1. Extraemos el token de la URL manualmente (Lo que faltaba en Sites)
+                // Extraer tokens del hash de la URL
                 const hash = window.location.hash.substring(1);
                 const params = new URLSearchParams(hash);
                 const accessToken = params.get("access_token");
                 const refreshToken = params.get("refresh_token");
 
-                // 2. Inicializamos Supabase JUSTO antes de usarlo
+                // Inicializar Supabase sin persistencia para evitar choques
                 const supabase = supabasejs.createClient(SB_URL, SB_KEY, {
-                    auth: { persistSession: false }
+                    auth: { persistSession: false, autoRefreshToken: false }
                 });
 
-                // 3. Inyectamos la sesión si tenemos los tokens
-                if (accessToken && refreshToken) {
+                // Forzar la sesión con el token de la URL
+                if (accessToken) {
                     await supabase.auth.setSession({
                         access_token: accessToken,
                         refresh_token: refreshToken
                     });
                 }
 
-                // 4. Intentamos el cambio
+                // Cambiar contraseña
                 const { error } = await supabase.auth.updateUser({ password: password });
 
                 if (error) {
@@ -73,19 +48,16 @@
                     btn.disabled = false;
                     btn.innerText = "REINTENTAR";
                 } else {
-                    status.innerText = "✅ ¡Contraseña cambiada con éxito!";
+                    status.innerText = "✅ ¡Éxito! Ya puedes cerrar esta pestaña.";
                     status.style.color = "green";
                     btn.style.display = "none";
                     document.getElementById('passInput').style.display = "none";
-                    setTimeout(() => alert("¡Listo! Ya puedes usar tu nueva clave en la extensión."), 500);
                 }
             } catch (err) {
-                status.innerText = "Error de red o sesión expirada.";
+                status.innerText = "❌ Error de conexión o link expirado.";
                 status.style.color = "red";
                 btn.disabled = false;
                 btn.innerText = "REINTENTAR";
             }
         };
     </script>
-</body>
-</html>
