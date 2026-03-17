@@ -25,10 +25,9 @@
     </div>
 
     <script>
-        // --- POLICÍA DE TRÁFICO (ENRUTADOR) ---
-        const urlHash = window.location.hash;
-        if (urlHash.includes("type=signup")) {
-            // Si viene de confirmar cuenta, lo enviamos a la bienvenida
+        // --- POLICÍA DE TRÁFICO BLINDADO ---
+        const urlCompleta = window.location.href;
+        if (urlCompleta.includes("type=signup")) {
             window.location.replace("https://app.hiveutilsproai.com/welcome.html");
         }
         // --------------------------------------
