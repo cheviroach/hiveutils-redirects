@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    // --- ENRUTADOR MAESTRO (SOLUCIÓN DEFINITIVA) ---
-        const hashContent = window.location.hash;
-        
-        // Buscamos 'type=signup' específicamente dentro del texto largo del hash
-        if (hashContent.includes("type=signup")) {
-            console.log("Detectado registro nuevo. Redirigiendo...");
-            window.location.replace("https://app.hiveutilsproai.com/welcome.html" + hashContent);
+    <meta charset="UTF-8">
+    <script>
+        // ENRUTADOR CORREGIDO (Sin la "L" extra)
+        if (window.location.hash.includes("type=signup")) {
+            window.location.replace("https://app.hiveutilsproai.com/welcome.html");
         }
-        // -----------------------------------------------
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nueva Contraseña | HiveUtils Pro AI</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nueva Contraseña | HiveUtils Pro AI</title>
