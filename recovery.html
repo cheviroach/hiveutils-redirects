@@ -1,40 +1,28 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nueva Contraseña | HiveUtils Pro AI</title>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <style>
-        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f7f6; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .card { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; width: 100%; max-width: 400px; }
-        input { padding: 15px; width: 90%; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; }
-        button { background-color: #007bff; color: white; border: none; padding: 15px; border-radius: 8px; font-weight: bold; width: 100%; cursor: pointer; font-size: 16px; transition: 0.3s; }
-        button:disabled { background-color: #ccc; cursor: not-allowed; }
-        #status { margin-top: 15px; font-weight: bold; font-size: 14px; }
-    </style>
-</head>
-<body>
-    <div class="card">
-        <h2 style="color: #333;">Nueva Contraseña</h2>
-        <p style="color: #666; font-size: 14px;">Ingresa tu nueva clave para HiveUtils Pro AI.</p>
-        <input type="password" id="passInput" placeholder="Mínimo 6 caracteres">
-        <button id="saveBtn">ACTUALIZAR AHORA</button>
-        <p id="status"></p>
-    </div>
-
-    <script>
+<script>
         const SB_URL = "https://kykbnqqdfhzzdtkpdwuy.supabase.co";
         const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5a2JucXFkZmh6emR0a3Bkd3V5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNTc4MjksImV4cCI6MjA4ODkzMzgyOX0.jI7cburkLgjE2dtovKS4SSLrUNyzHA0Q8IubdYYu_a8";
         const supabase = supabasejs.createClient(SB_URL, SB_KEY);
 
-        // Al cargar, verificar si tenemos el token en la URL
-        window.onload = () => {
-            if (!window.location.hash.includes("access_token")) {
-                document.getElementById('status').innerText = "⚠️ Error: Sesión no encontrada. Pide un nuevo correo.";
-                document.getElementById('status').style.color = "orange";
+        // --- FUNCIÓN PARA FORZAR EL LOGIN CON EL TOKEN DE LA URL ---
+        async function authConToken() {
+            const hash = window.location.hash.substring(1);
+            const params = new URLSearchParams(hash);
+            const accessToken = params.get("access_token");
+            const refreshToken = params.get("refresh_token");
+
+            if (accessToken && refreshToken) {
+                console.log("Token detectado, iniciando sesión...");
+                await supabase.auth.setSession({
+                    access_token: accessToken,
+                    refresh_token: refreshToken
+                });
+            } else {
+                document.getElementById('status').innerText = "⚠️ No se detectó sesión activa.";
             }
-        };
+        }
+
+        // Ejecutar al cargar la página
+        authConToken();
 
         document.getElementById('saveBtn').onclick = async () => {
             const btn = document.getElementById('saveBtn');
@@ -47,35 +35,29 @@
                 return;
             }
 
-            // Bloquear botón para evitar múltiples clics
             btn.disabled = true;
             btn.innerText = "PROCESANDO...";
-            status.innerText = "Conectando con Supabase...";
-            status.style.color = "#666";
+            status.innerText = "Actualizando...";
 
             try {
-                const { data, error } = await supabase.auth.updateUser({ password: password });
+                // Intentamos actualizar la contraseña
+                const { error } = await supabase.auth.updateUser({ password: password });
 
                 if (error) {
-                    console.error("Error de Supabase:", error);
                     status.innerText = "❌ Error: " + error.message;
                     status.style.color = "red";
                     btn.disabled = false;
                     btn.innerText = "REINTENTAR";
                 } else {
-                    status.innerText = "✅ ¡Éxito! Contraseña cambiada.";
+                    status.innerText = "✅ ¡Contraseña cambiada con éxito!";
                     status.style.color = "green";
                     btn.style.display = "none";
                     document.getElementById('passInput').style.display = "none";
-                    setTimeout(() => alert("¡Listo! Ya puedes iniciar sesión en la extensión."), 500);
                 }
             } catch (err) {
-                status.innerText = "❌ Error crítico de conexión.";
+                status.innerText = "❌ Error de conexión.";
                 status.style.color = "red";
                 btn.disabled = false;
-                btn.innerText = "REINTENTAR";
             }
         };
     </script>
-</body>
-</html>
