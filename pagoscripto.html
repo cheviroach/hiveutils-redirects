@@ -9,6 +9,7 @@
             --gold: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
             --dark-premium: #1a1a1a;
             --soft-gray: #f4f7f9;
+            --danger: #e53e3e;
         }
 
         body {
@@ -33,18 +34,17 @@
             vertical-align: middle;
         }
 
-        /* --- LOGOS 100% MÁS GRANDES --- */
         .wallet-logos {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 25px; /* Aumenté la separación para que respiren mejor */
+            gap: 25px;
             margin-top: 15px;
             flex-wrap: wrap;
         }
 
         .wallet-logos img {
-            height: 56px; /* Aumentado al doble (antes era 28px) */
+            height: 56px;
             object-fit: contain;
             opacity: 0.9;
             transition: all 0.3s ease;
@@ -55,17 +55,24 @@
             transform: scale(1.15);
         }
 
+        /* --- CONTENEDOR DE CORREO MEJORADO --- */
         .email-container {
             max-width: 450px;
-            margin: 0 auto 50px;
+            margin: 0 auto 40px;
             text-align: center;
+            background: white;
+            padding: 25px;
+            border-radius: 24px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 2px solid #ffb100;
         }
 
         .email-container label {
             display: block;
-            font-weight: 700;
+            font-weight: 800;
             margin-bottom: 12px;
-            color: #4a5568;
+            color: #1a1a1a;
+            font-size: 1.1rem;
         }
 
         #email_main {
@@ -73,18 +80,38 @@
             padding: 15px;
             border: 2px solid #e2e8f0;
             border-radius: 12px;
-            font-size: 16px;
+            font-size: 18px;
             box-sizing: border-box;
             transition: all 0.3s ease;
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            font-weight: bold;
         }
 
         #email_main:focus {
             outline: none;
             border-color: #ffb100;
-            background: #fff;
             box-shadow: 0 0 0 4px rgba(255, 177, 0, 0.15);
+        }
+
+        /* --- ALERTA DE COMISIONES CRÍTICA --- */
+        .commission-alert {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff4f4;
+            border: 2px solid var(--danger);
+            border-radius: 16px;
+            text-align: left;
+            color: #444;
+        }
+
+        .commission-alert h3 {
+            margin: 0 0 10px 0;
+            color: var(--danger);
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .pricing-grid {
@@ -92,8 +119,7 @@
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
             max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 10px;
+            margin: 0 auto 40px;
         }
 
         .card {
@@ -109,66 +135,9 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.03);
         }
 
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 30px rgba(0,0,0,0.08);
-        }
+        .card.popular { border: 2px solid #ffb100; background: #fffdf5; }
 
-        .card.popular {
-            border: 2px solid #ffb100;
-            background: #fffdf5;
-        }
-
-        .popular-tag {
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--gold);
-            color: white;
-            padding: 4px 15px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 800;
-            text-transform: uppercase;
-        }
-
-        .plan-name {
-            font-size: 13px;
-            font-weight: 700;
-            color: #718096;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-        }
-
-        .plan-price {
-            font-size: 42px;
-            font-weight: 800;
-            margin-bottom: 5px;
-            color: #1a202c;
-        }
-
-        .plan-price span { font-size: 16px; color: #a0aec0; font-weight: 400; }
-
-        .plan-info {
-            font-size: 14px;
-            color: #4a5568;
-            margin-bottom: 15px;
-            font-weight: 500;
-        }
-
-        .save-label {
-            color: #38a169;
-            font-weight: 700;
-            font-size: 13px;
-            margin-bottom: 25px;
-            min-height: 18px;
-        }
-
-        .btn-slot {
-            margin-top: auto;
-        }
+        .plan-price { font-size: 42px; font-weight: 800; color: #1a202c; }
 
         .btn-pay-crypto {
             background-color: var(--dark-premium);
@@ -181,45 +150,32 @@
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
         }
 
-        .btn-pay-crypto:hover {
-            background-color: #333;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        .btn-pay-crypto:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+
+        /* --- ESTILO AVISO LEGAL --- */
+        .legal-notice {
+            max-width: 850px;
+            margin: 60px auto 20px;
+            padding: 30px;
+            border-top: 1px solid #cbd5e0;
+            color: #718096;
+            font-size: 12px;
+            line-height: 1.7;
+            text-align: justify;
         }
 
-        #email_error {
-            color: #e53e3e;
-            font-size: 13px;
-            margin-top: 10px;
-            display: none;
-            font-weight: 600;
+        .legal-footer {
+            background: #edf2f7;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-size: 11px;
+            border: 1px solid #e2e8f0;
         }
 
-        .btn-loading {
-            opacity: 0.7;
-            cursor: not-allowed;
-        }
-
-        .info-message {
-            text-align: center;
-            background: #fff;
-            border: 2px dashed #e2e8f0;
-            color: #4a5568;
-            padding: 20px;
-            border-radius: 16px;
-            max-width: 600px;
-            margin: 40px auto 20px;
-            font-size: 15px;
-            font-weight: 500;
-            line-height: 1.5;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-        }
+        #email_error { color: var(--danger); display: none; margin-top: 10px; font-weight: 600; }
     </style>
 </head>
 <body>
@@ -229,18 +185,26 @@
     <p>Pago seguro con Criptomonedas (USDT, BNB, TRX y más)</p>
     
     <div class="wallet-logos">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Binance_Logo.svg" alt="Binance" title="Pagar desde Binance">
-        <img src="https://s2.coinmarketcap.com/static/img/exchanges/64x64/521.png" alt="Bybit" title="Pagar desde Bybit" style="border-radius: 50%;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg" alt="MetaMask" title="Pagar con MetaMask">
-        <img src="https://pbs.twimg.com/profile_images/1699066667958923264/B2sS1x7O_400x400.jpg" alt="Airtm" title="Pagar desde Airtm" style="border-radius: 50%;">
-        <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/7083.png" alt="Trust Wallet" title="Pagar con Trust Wallet">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Binance_Logo.svg" alt="Binance">
+        <img src="https://s2.coinmarketcap.com/static/img/exchanges/64x64/521.png" alt="Bybit" style="border-radius: 50%;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg" alt="MetaMask">
+        <img src="https://pbs.twimg.com/profile_images/1699066667958923264/B2sS1x7O_400x400.jpg" alt="Airtm" style="border-radius: 50%;">
+        <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/7083.png" alt="Trust Wallet">
     </div>
 </div>
 
 <div class="email-container">
-    <label for="email_main">1. Tu correo registrado en HiveUtils:</label>
-    <input type="email" id="email_main" placeholder="ejemplo@correo.com" required>
+    <label for="email_main">📧 PASO 1: Tu correo de HiveUtils</label>
+    <input type="email" id="email_main" placeholder="tu-usuario@gmail.com" required>
     <div id="email_error">⚠️ Introduce un correo válido para continuar</div>
+</div>
+
+<div class="commission-alert">
+    <h3>⚠️ ¡AVISO CRÍTICO DE COMISIONES!</h3>
+    <p>
+        Si pagas desde <b>Binance</b> u otro Exchange, ellos descuentan una <b>comisión de retiro</b> (aprox. $0.30 - $1.00). 
+        Debes sumar esa comisión al monto enviado para que recibamos el <b>MONTO EXACTO</b>. Si envías menos, la activación fallará.
+    </p>
 </div>
 
 <div class="pricing-grid">
@@ -248,7 +212,6 @@
         <div class="plan-name">Mensual</div>
         <div class="plan-price">$4<span>/mes</span></div>
         <div class="plan-info">30 Días de Acceso</div>
-        <div class="save-label">Acceso Total</div>
         <div class="btn-slot">
             <button class="btn-pay-crypto" onclick="processCryptoPayment(4, 'HiveUtils PRO: 1 Mes', this)">Pagar con Crypto 🪙</button>
         </div>
@@ -258,7 +221,6 @@
         <div class="plan-name">Trimestral</div>
         <div class="plan-price">$10<span>/3m</span></div>
         <div class="plan-info">90 Días de Acceso</div>
-        <div class="save-label">Ahorras $2 USD</div>
         <div class="btn-slot">
             <button class="btn-pay-crypto" onclick="processCryptoPayment(10, 'HiveUtils PRO: 3 Meses', this)">Pagar con Crypto 🪙</button>
         </div>
@@ -268,7 +230,6 @@
         <div class="plan-name">Semestral</div>
         <div class="plan-price">$18<span>/6m</span></div>
         <div class="plan-info">180 Días de Acceso</div>
-        <div class="save-label">Ahorras $6 USD</div>
         <div class="btn-slot">
             <button class="btn-pay-crypto" onclick="processCryptoPayment(18, 'HiveUtils PRO: 6 Meses', this)">Pagar con Crypto 🪙</button>
         </div>
@@ -279,19 +240,21 @@
         <div class="plan-name">Anual</div>
         <div class="plan-price">$30<span>/año</span></div>
         <div class="plan-info">365 Días de Acceso</div>
-        <div class="save-label">Ahorras $18 USD</div>
         <div class="btn-slot">
             <button class="btn-pay-crypto" onclick="processCryptoPayment(30, 'HiveUtils PRO: 1 Año', this)">Pagar con Crypto 🪙</button>
         </div>
     </div>
 </div>
 
-<div style="max-width: 600px; margin: 20px auto; padding: 15px; background: #fff9e6; border-left: 5px solid #ffb100; border-radius: 8px; text-align: left; font-size: 14px; color: #856404;">
-    <strong>⚠️ ATENCIÓN:</strong> Al pagar desde Binance u otras billeteras, <b>debes sumar la comisión de retiro</b>. Asegúrate de que el monto que reciba la plataforma sea el <b>MONTO EXACTO</b> que indica la factura, o tu licencia no se activará automáticamente.
-</div>
-
-<div class="info-message">
-    💳 Podrás pagar fácilmente escaneando el código QR directamente desde tu App de <b>Binance, Bybit</b> o tu billetera favorita.
+<div class="legal-notice">
+    <strong>Aviso legal:</strong> Los precios de los activos digitales están sujetos a un alto riesgo de mercado y volatilidad. El valor de tu transacción puede variar según la fluctuación de la red. Solo tú eres responsable de tus decisiones de envío y HiveUtils Pro AI no se hace responsable de ninguna pérdida por errores en la selección de red o direcciones incorrectas. Los rendimientos pasados no garantizan rendimientos futuros. Solo debes realizar pagos con los que estés familiarizado y cuyos riesgos comprendas plenamente. Este material no debe interpretarse como asesoría financiera.
+    
+    <div class="legal-footer">
+        <strong>Nota de Seguridad:</strong> Ten cuidado con los sitios de phishing. Asegúrate siempre de estar en nuestro sitio oficial <b>app.hiveutilsproai.com</b> antes de ingresar cualquier dato confidencial. <br>
+        Recibes esta información por ser un usuario registrado de hiveutilsproai.com. Para más información, consulta nuestra Política de Privacidad.
+    </div>
+    
+    <p style="text-align: center; margin-top: 20px; font-size: 10px;">© 2026 CHEVIROACH AI Team - Todos los derechos reservados.</p>
 </div>
 
 <script>
@@ -319,10 +282,8 @@
 
         const originalText = btnElement.innerHTML;
         btnElement.innerHTML = "Generando Factura... ⏳";
-        btnElement.classList.add('btn-loading');
         btnElement.disabled = true;
 
-        // AQUÍ DEBES PEGAR TU API KEY DE NOWPAYMENTS
         const API_KEY = "JMDE1BA-8C94J5V-NFNP4R5-NN99CGG"; 
 
         try {
@@ -347,16 +308,13 @@
             if (data.invoice_url) {
                 window.location.href = data.invoice_url;
             } else {
-                alert("Ocurrió un error al generar el pago. Intenta de nuevo.");
-                console.error("Error NowPayments:", data);
+                alert("Error al generar el pago. Intenta de nuevo.");
                 btnElement.innerHTML = originalText;
-                btnElement.classList.remove('btn-loading');
                 btnElement.disabled = false;
             }
         } catch (error) {
-            alert("Error de conexión. Revisa tu internet e intenta de nuevo.");
+            alert("Error de conexión.");
             btnElement.innerHTML = originalText;
-            btnElement.classList.remove('btn-loading');
             btnElement.disabled = false;
         }
     }
