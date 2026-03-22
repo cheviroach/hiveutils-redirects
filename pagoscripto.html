@@ -185,6 +185,22 @@
             opacity: 0.7;
             cursor: not-allowed;
         }
+
+        /* Estilo para el mensaje informativo de Binance/Bybit */
+        .info-message {
+            text-align: center;
+            background: #fff;
+            border: 2px dashed #e2e8f0;
+            color: #4a5568;
+            padding: 20px;
+            border-radius: 16px;
+            max-width: 600px;
+            margin: 40px auto 20px;
+            font-size: 15px;
+            font-weight: 500;
+            line-height: 1.5;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
     </style>
 </head>
 <body>
@@ -243,6 +259,10 @@
     </div>
 </div>
 
+<div class="info-message">
+    💳 Podrás pagar fácilmente escaneando el código QR directamente desde tu App de <b>Binance, Bybit</b> o tu billetera favorita.
+</div>
+
 <script>
     function validateAndGetEmail() {
         const email = document.getElementById('email_main').value.trim();
@@ -286,6 +306,7 @@
                 body: JSON.stringify({
                     price_amount: amount,
                     price_currency: "usd",
+                    pay_currency: "usdtbsc", // <-- ESTO PONE USDT BSC POR DEFECTO
                     // IMPORTANTE: Aquí mandamos el correo para que Supabase sepa a quién activarle la licencia
                     order_id: email, 
                     order_description: description,
