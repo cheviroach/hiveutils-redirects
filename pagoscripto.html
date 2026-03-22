@@ -33,6 +33,28 @@
             vertical-align: middle;
         }
 
+        /* Estilos para la nueva fila de logos */
+        .wallet-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 18px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .wallet-logos img {
+            height: 28px;
+            object-fit: contain;
+            opacity: 0.85;
+            transition: all 0.3s ease;
+        }
+
+        .wallet-logos img:hover {
+            opacity: 1;
+            transform: scale(1.15);
+        }
+
         .email-container {
             max-width: 450px;
             margin: 0 auto 50px;
@@ -148,7 +170,6 @@
             margin-top: auto;
         }
 
-        /* Diseño del botón Crypto */
         .btn-pay-crypto {
             background-color: var(--dark-premium);
             color: white;
@@ -180,13 +201,11 @@
             font-weight: 600;
         }
 
-        /* Loader para cuando están esperando que genere el QR */
         .btn-loading {
             opacity: 0.7;
             cursor: not-allowed;
         }
 
-        /* Estilo para el mensaje informativo de Binance/Bybit */
         .info-message {
             text-align: center;
             background: #fff;
@@ -208,6 +227,14 @@
 <div class="header-section">
     <h1>HiveUtils <span class="pro-badge">PRO</span></h1>
     <p>Pago seguro con Criptomonedas (USDT, BNB, TRX y más)</p>
+    
+    <div class="wallet-logos">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Binance_Logo.svg" alt="Binance" title="Pagar desde Binance">
+        <img src="https://s2.coinmarketcap.com/static/img/exchanges/64x64/521.png" alt="Bybit" title="Pagar desde Bybit" style="border-radius: 50%;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg" alt="MetaMask" title="Pagar con MetaMask">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Airtm_logo.svg" alt="Airtm" title="Pagar desde Airtm">
+        <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/7083.png" alt="Trust Wallet" title="Pagar con Trust Wallet">
+    </div>
 </div>
 
 <div class="email-container">
@@ -282,14 +309,12 @@
     async function processCryptoPayment(amount, description, btnElement) {
         const email = validateAndGetEmail();
         if (!email) {
-            // Animación para llamar la atención al correo
             document.getElementById('email_main').scrollIntoView({ behavior: 'smooth', block: 'center' });
             return;
         }
 
-        // Cambiar el botón a estado de carga
         const originalText = btnElement.innerHTML;
-        btnElement.innerHTML = "Generando QR... ⏳";
+        btnElement.innerHTML = "Generando Factura... ⏳";
         btnElement.classList.add('btn-loading');
         btnElement.disabled = true;
 
@@ -306,11 +331,9 @@
                 body: JSON.stringify({
                     price_amount: amount,
                     price_currency: "usd",
-                    pay_currency: "usdtbsc", // <-- ESTO PONE USDT BSC POR DEFECTO
-                    // IMPORTANTE: Aquí mandamos el correo para que Supabase sepa a quién activarle la licencia
+                    // IMPORTANTE: Se ha removido 'pay_currency' para que NowPayments muestre la lista completa
                     order_id: email, 
                     order_description: description,
-                    // URL a la que vuelven cuando pagan con éxito (puedes cambiarla por una página de "Gracias")
                     success_url: "https://www.hiveutilsproai.com/", 
                     cancel_url: window.location.href
                 })
@@ -319,7 +342,6 @@
             const data = await response.json();
 
             if (data.invoice_url) {
-                // Redirige al cliente a la página segura de cobro de NowPayments
                 window.location.href = data.invoice_url;
             } else {
                 alert("Ocurrió un error al generar el pago. Intenta de nuevo.");
