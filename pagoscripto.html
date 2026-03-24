@@ -254,11 +254,12 @@
                     "x-api-key": API_KEY,
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({
+               body: JSON.stringify({
                     price_amount: amount,
                     price_currency: "usd",
                     order_id: email, 
                     order_description: description,
+                    ipn_callback_url: "https://kykbnqqdfhzzdtkpdwuy.supabase.co/functions/v1/webhook-nowpayments", // 👈 ¡ESTA ES LA LÍNEA MÁGICA!
                     success_url: "https://www.hiveutilsproai.com/", 
                     cancel_url: window.location.href
                 })
