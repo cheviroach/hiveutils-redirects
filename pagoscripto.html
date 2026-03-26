@@ -233,9 +233,6 @@
         return email;
     }
 
-    <script>
-    // ... tu función validateAndGetEmail() se queda igual ...
-
     async function processCryptoPayment(amount, description, btnElement) {
         const email = validateAndGetEmail();
         if (!email) {
@@ -267,11 +264,13 @@
             if (data.invoice_url) {
                 window.location.href = data.invoice_url;
             } else {
+                console.error("Error del servidor de Supabase:", data);
                 alert("Error al generar factura. Verifica tu conexión.");
                 btnElement.innerHTML = originalText;
                 btnElement.disabled = false;
             }
         } catch (error) {
+            console.error("Error de Red/Fetch:", error);
             alert("Error de conexión con el servidor.");
             btnElement.innerHTML = originalText;
             btnElement.disabled = false;
