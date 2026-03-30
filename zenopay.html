@@ -54,7 +54,6 @@
             box-shadow: 0 0 15px rgba(252, 213, 53, 0.3);
         }
 
-        /* --- SINCRONIZACIÓN PERFECTA DE LOGOS SUPERIORES --- */
         .wallet-logos {
             display: flex;
             justify-content: center;
@@ -65,19 +64,19 @@
         }
 
         .wallet-logos img {
-            height: 40px; /* Altura estricta para que todos sean iguales */
+            height: 40px;
             width: auto;
             max-width: 150px;
-            object-fit: contain; /* Evita que se deformen */
+            object-fit: contain;
             opacity: 0.7;
             transition: all 0.3s ease;
-            filter: grayscale(100%) brightness(200%); /* Los hace ver plateados/elegantes */
+            filter: grayscale(100%) brightness(200%);
         }
 
         .wallet-logos img:hover {
             opacity: 1;
             transform: scale(1.1);
-            filter: grayscale(0%) brightness(100%); /* Recuperan su color al pasar el mouse */
+            filter: grayscale(0%) brightness(100%);
         }
 
         .email-container {
@@ -120,14 +119,16 @@
 
         #email_main::placeholder { color: var(--text-secondary); }
 
+        /* --- DE VUELTA A HORIZONTAL (EN FILA) --- */
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 25px;
             max-width: 1200px;
             margin: 0 auto 40px;
         }
 
+        /* --- EFECTO DE LEVANTAMIENTO SUPERIOR Y SOMBRAS 3D MANTENIDO --- */
         .card {
             background: var(--bg-card);
             border-radius: 24px;
@@ -139,15 +140,21 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4); /* Sombra base */
         }
 
         .card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-10px) scale(1.02); /* Salta hacia arriba y crece un poco */
             border-color: var(--binance-yellow);
-            box-shadow: 0 15px 35px rgba(252, 213, 53, 0.1);
+            /* Sombra combinada oscura abajo y aura dorada alrededor */
+            box-shadow: 0 25px 40px rgba(0,0,0,0.8), 0 0 25px rgba(252, 213, 53, 0.25);
+            z-index: 10;
         }
 
-        .card.popular { border: 1px solid var(--binance-yellow); }
+        .card.popular { 
+            border: 1px solid var(--binance-yellow); 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4), 0 0 10px rgba(252, 213, 53, 0.1);
+        }
         
         .popular-tag {
             position: absolute;
@@ -164,11 +171,10 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
-        /* --- SINCRONIZACIÓN DE IMÁGENES DE PLANES --- */
         .plan-image {
             width: 100%;
-            height: 140px; /* Altura fija obligatoria */
-            object-fit: contain; /* Las imágenes se ajustarán sin cortarse ni estirarse */
+            height: 140px;
+            object-fit: contain;
             margin-bottom: 25px;
             transition: transform 0.3s ease;
             filter: drop-shadow(0 10px 15px rgba(0,0,0,0.4));
@@ -176,7 +182,6 @@
 
         .card:hover .plan-image { transform: scale(1.05); }
 
-        /* --- SINCRONIZACIÓN DEL BOTÓN Y LOGO --- */
         .btn-pay-crypto {
             display: flex;
             justify-content: center;
@@ -200,7 +205,7 @@
             width: 22px;
             display: block;
             fill: var(--binance-dark);
-            flex-shrink: 0; /* Evita que el logo se aplaste */
+            flex-shrink: 0;
         }
 
         .btn-pay-crypto:hover { 
@@ -242,9 +247,8 @@
 
 <div class="pricing-grid">
     <div class="card">
-        <div class="card">
         <img src="plan-1-mes.png" alt="PLAN 1 MES" class="plan-image">
-        <button class="btn-pay-crypto" onclick="processZenoPayment(4, 'HiveUtils PRO: 1 Mes', this)">...
+        <button class="btn-pay-crypto" onclick="processZenoPayment(4, 'HiveUtils PRO: 1 Mes', this)">
             Pagar con BINANCE PAY 
             <svg class="binance-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12.0003 4.96541L15.3087 8.27387L17.5192 6.06338L12.0003 0.544434L6.48132 6.06338L8.69186 8.27387L12.0003 4.96541ZM4.27083 8.27387L0.962402 11.5823L4.27083 14.8907L6.48132 12.6802L4.27083 10.4697L6.48132 8.27387H4.27083ZM19.7297 8.27387L17.5192 10.4697L19.7297 12.6802L21.9402 10.4697L19.7297 8.27387ZM12.0003 19.0345L8.69186 15.7261L6.48132 17.9365L12.0003 23.4555L17.5192 17.9365L15.3087 15.7261L12.0003 19.0345ZM12.0003 9.37895L9.78985 11.5894L12.0003 13.7999L14.2108 11.5894L12.0003 9.37895Z"/>
@@ -253,9 +257,8 @@
     </div>
 
     <div class="card">
-        <div class="card">
         <img src="plan-3-meses.png" alt="PLAN 3 MESES" class="plan-image">
-        <button class="btn-pay-crypto" onclick="processZenoPayment(10, 'HiveUtils PRO: 3 Meses', this)">...
+        <button class="btn-pay-crypto" onclick="processZenoPayment(10, 'HiveUtils PRO: 3 Meses', this)">
             Pagar con BINANCE PAY
             <svg class="binance-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12.0003 4.96541L15.3087 8.27387L17.5192 6.06338L12.0003 0.544434L6.48132 6.06338L8.69186 8.27387L12.0003 4.96541ZM4.27083 8.27387L0.962402 11.5823L4.27083 14.8907L6.48132 12.6802L4.27083 10.4697L6.48132 8.27387H4.27083ZM19.7297 8.27387L17.5192 10.4697L19.7297 12.6802L21.9402 10.4697L19.7297 8.27387ZM12.0003 19.0345L8.69186 15.7261L6.48132 17.9365L12.0003 23.4555L17.5192 17.9365L15.3087 15.7261L12.0003 19.0345ZM12.0003 9.37895L9.78985 11.5894L12.0003 13.7999L14.2108 11.5894L12.0003 9.37895Z"/>
@@ -264,9 +267,8 @@
     </div>
 
     <div class="card">
-        <div class="card">
         <img src="plan-6-meses.png" alt="PLAN 6 MESES" class="plan-image">
-        <button class="btn-pay-crypto" onclick="processZenoPayment(18, 'HiveUtils PRO: 6 Meses', this)">...
+        <button class="btn-pay-crypto" onclick="processZenoPayment(18, 'HiveUtils PRO: 6 Meses', this)">
             Pagar con BINANCE PAY 
             <svg class="binance-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12.0003 4.96541L15.3087 8.27387L17.5192 6.06338L12.0003 0.544434L6.48132 6.06338L8.69186 8.27387L12.0003 4.96541ZM4.27083 8.27387L0.962402 11.5823L4.27083 14.8907L6.48132 12.6802L4.27083 10.4697L6.48132 8.27387H4.27083ZM19.7297 8.27387L17.5192 10.4697L19.7297 12.6802L21.9402 10.4697L19.7297 8.27387ZM12.0003 19.0345L8.69186 15.7261L6.48132 17.9365L12.0003 23.4555L17.5192 17.9365L15.3087 15.7261L12.0003 19.0345ZM12.0003 9.37895L9.78985 11.5894L12.0003 13.7999L14.2108 11.5894L12.0003 9.37895Z"/>
@@ -275,10 +277,9 @@
     </div>
 
     <div class="card popular">
-       <div class="card popular">
         <div class="popular-tag">¡Recomendado!</div>
         <img src="plan-anual.png" alt="PLAN ANUAL" class="plan-image">
-        <button class="btn-pay-crypto" onclick="processZenoPayment(30, 'HiveUtils PRO: 1 Año', this)">...
+        <button class="btn-pay-crypto" onclick="processZenoPayment(30, 'HiveUtils PRO: 1 Año', this)">
             Pagar con BINANCE PAY 
             <svg class="binance-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12.0003 4.96541L15.3087 8.27387L17.5192 6.06338L12.0003 0.544434L6.48132 6.06338L8.69186 8.27387L12.0003 4.96541ZM4.27083 8.27387L0.962402 11.5823L4.27083 14.8907L6.48132 12.6802L4.27083 10.4697L6.48132 8.27387H4.27083ZM19.7297 8.27387L17.5192 10.4697L19.7297 12.6802L21.9402 10.4697L19.7297 8.27387ZM12.0003 19.0345L8.69186 15.7261L6.48132 17.9365L12.0003 23.4555L17.5192 17.9365L15.3087 15.7261L12.0003 19.0345ZM12.0003 9.37895L9.78985 11.5894L12.0003 13.7999L14.2108 11.5894L12.0003 9.37895Z"/>
