@@ -1,0 +1,58 @@
+<button class="btn-pay-crypto" style="background-color: #FCD535; color: #1E2329;" onclick="processZenoPayment(4, 'HiveUtils PRO: 1 Mes', this)">Pagar con Binance Pay 🟨</button>
+
+<button class="btn-pay-crypto" style="background-color: #FCD535; color: #1E2329;" onclick="processZenoPayment(10, 'HiveUtils PRO: 3 Meses', this)">Pagar con Binance Pay 🟨</button>
+
+<script>
+    function validateAndGetEmail() {
+        const email = document.getElementById('email_main').value.trim();
+        const error = document.getElementById('email_error');
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        
+        if(!regex.test(email)) {
+            error.style.display = 'block';
+            document.getElementById('email_main').style.borderColor = '#e53e3e';
+            return null;
+        }
+        error.style.display = 'none';
+        document.getElementById('email_main').style.borderColor = '#38a169';
+        return email;
+    }
+
+    async function processZenoPayment(amount, description, btnElement) {
+        const email = validateAndGetEmail();
+        if (!email) {
+            document.getElementById('email_main').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return;
+        }
+
+        const originalText = btnElement.innerHTML;
+        btnElement.innerHTML = "Conectando con Binance... ⏳";
+        btnElement.disabled = true;
+
+        try {
+            // ⚠️ Apuntamos a la nueva función de Zeno
+            const response = await fetch("https://kykbnqqdfhzzdtkpdwuy.supabase.co/functions/v1/create-zeno-invoice", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ amount: amount, description: description, email: email })
+            });
+
+           const data = await response.json();
+
+// ✅ CORRECCIÓN AQUÍ: Zeno Bank devuelve "checkoutUrl"
+if (data.checkoutUrl) {
+    window.location.href = data.checkoutUrl; 
+} else {
+    console.error("Error al generar link de Zeno:", data);
+    alert("Error al conectar con Binance Pay. Intenta de nuevo.");
+    btnElement.innerHTML = originalText;
+    btnElement.disabled = false;
+}
+        } catch (error) {
+            console.error("Error de Red/Fetch:", error);
+            alert("Error de conexión con el servidor.");
+            btnElement.innerHTML = originalText;
+            btnElement.disabled = false;
+        }
+    }
+</script>
