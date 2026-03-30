@@ -3,21 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Membresía Elite Crypto | HiveUtils PRO</title>
+    <title>Membresía Elite Crypto | HIVEUTILS PRO AI</title>
     <style>
         :root {
-            --gold: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
-            --dark-premium: #1a1a1a;
-            --soft-gray: #f4f7f9;
-            --danger: #e53e3e;
+            /* Paleta Premium Dark Crypto Sincronizada */
+            --bg-main: #0B0E11;
+            --bg-card: #181A20;
+            --text-primary: #EAECEF;
+            --text-secondary: #848E9C;
+            --border-color: #2B3139;
+            --binance-yellow: #FCD535;
+            --binance-dark: #1E2329;
+            --gold-gradient: linear-gradient(135deg, #FCD535 0%, #F39C12 100%);
+            --danger: #F6465D;
         }
 
         body {
             font-family: 'Inter', -apple-system, system-ui, sans-serif;
-            background-color: var(--soft-gray);
+            background-color: var(--bg-main);
             margin: 0;
             padding: 40px 10px;
-            color: #333;
+            color: var(--text-primary);
         }
 
         .header-section {
@@ -25,136 +31,188 @@
             margin-bottom: 40px;
         }
 
+        .header-section h1 {
+            color: var(--text-primary);
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .header-section p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
         .pro-badge {
-            background: var(--gold);
-            color: white;
-            padding: 2px 10px;
-            border-radius: 6px;
-            font-size: 0.6em;
+            background: var(--gold-gradient);
+            color: var(--binance-dark);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 0.5em;
             vertical-align: middle;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            box-shadow: 0 0 15px rgba(252, 213, 53, 0.3);
         }
 
         .wallet-logos {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 25px;
-            margin-top: 15px;
+            gap: 30px;
+            margin-top: 25px;
             flex-wrap: wrap;
         }
 
         .wallet-logos img {
-            height: 56px;
+            height: 40px;
+            width: auto;
+            max-width: 150px;
             object-fit: contain;
-            opacity: 0.9;
+            opacity: 0.7;
             transition: all 0.3s ease;
+            filter: grayscale(100%) brightness(200%);
         }
 
         .wallet-logos img:hover {
             opacity: 1;
-            transform: scale(1.15);
+            transform: scale(1.1);
+            filter: grayscale(0%) brightness(100%);
         }
 
         .email-container {
             max-width: 450px;
             margin: 0 auto 40px;
             text-align: center;
-            background: white;
-            padding: 25px;
-            border-radius: 24px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border: 2px solid #ffb100;
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .email-container label {
             display: block;
-            font-weight: 800;
-            margin-bottom: 12px;
-            color: #1a1a1a;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-primary);
             font-size: 1.1rem;
         }
 
         #email_main {
             width: 100%;
-            padding: 15px;
-            border: 2px solid #e2e8f0;
+            padding: 16px;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
             border-radius: 12px;
-            font-size: 18px;
+            font-size: 16px;
             box-sizing: border-box;
             transition: all 0.3s ease;
             text-align: center;
-            font-weight: bold;
         }
 
         #email_main:focus {
             outline: none;
-            border-color: #ffb100;
-            box-shadow: 0 0 0 4px rgba(255, 177, 0, 0.15);
+            border-color: var(--binance-yellow);
+            box-shadow: 0 0 0 3px rgba(252, 213, 53, 0.15);
         }
 
+        #email_main::placeholder { color: var(--text-secondary); }
+
+        /* --- DISEÑO HORIZONTAL EN FILA --- */
         .pricing-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            gap: 25px;
             max-width: 1200px;
             margin: 0 auto 40px;
         }
 
+        /* --- EFECTO 3D DE LEVANTAMIENTO --- */
         .card {
-            background: white;
+            background: var(--bg-card);
             border-radius: 24px;
-            padding: 30px 20px;
+            padding: 25px;
             text-align: center;
             position: relative;
-            transition: all 0.3s ease;
-            border: 1px solid #e2e8f0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+            justify-content: space-between;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
         }
 
-        .card.popular { border: 2px solid #ffb100; background: #fffdf5; }
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--binance-yellow);
+            box-shadow: 0 25px 40px rgba(0,0,0,0.8), 0 0 25px rgba(252, 213, 53, 0.25);
+            z-index: 10;
+        }
+
+        .card.popular { 
+            border: 1px solid var(--binance-yellow); 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4), 0 0 10px rgba(252, 213, 53, 0.1);
+        }
+        
         .popular-tag {
             position: absolute;
-            top: -12px;
+            top: -14px;
             left: 50%;
             transform: translateX(-50%);
-            background: var(--gold);
-            color: white;
-            padding: 4px 15px;
+            background: var(--gold-gradient);
+            color: var(--binance-dark);
+            padding: 5px 18px;
             border-radius: 20px;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 800;
+            z-index: 2;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
-        .plan-price { font-size: 42px; font-weight: 800; color: #1a202c; }
-        .plan-price span { font-size: 16px; color: #a0aec0; }
+        .plan-image {
+            width: 100%;
+            height: 140px;
+            object-fit: contain;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.4));
+        }
+
+        .card:hover .plan-image { transform: scale(1.05); }
 
         .btn-pay-crypto {
-            background-color: var(--dark-premium);
-            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--binance-yellow);
+            color: var(--binance-dark);
             border: none;
-            padding: 15px 0;
+            padding: 16px 0;
             width: 100%;
-            border-radius: 50px;
+            border-radius: 12px;
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 800;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-top: 20px;
+            margin-top: auto;
         }
 
-        .btn-pay-crypto:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .btn-pay-crypto:hover { 
+            background-color: #f0c822;
+            box-shadow: 0 0 20px rgba(252, 213, 53, 0.3);
+        }
 
         .legal-notice {
             max-width: 850px;
             margin: 60px auto 20px;
             padding: 30px;
-            border-top: 1px solid #cbd5e0;
-            color: #718096;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
             font-size: 12px;
             line-height: 1.7;
-            text-align: justify;
+            text-align: center;
         }
 
         #email_error { color: var(--danger); display: none; margin-top: 10px; font-weight: 600; }
@@ -168,53 +226,51 @@
     
     <div class="wallet-logos">
         <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Binance_Logo.svg" alt="Binance">
-        <img src="https://s2.coinmarketcap.com/static/img/exchanges/64x64/521.png" alt="Bybit" style="border-radius: 50%;">
         <img src="https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg" alt="MetaMask">
-        <img src="https://pbs.twimg.com/profile_images/1699066667958923264/B2sS1x7O_400x400.jpg" alt="Airtm" style="border-radius: 50%;">
-        <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/7083.png" alt="Trust Wallet">
+        <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/825.png" alt="USDT">
     </div>
 </div>
 
 <div class="email-container">
-    <label for="email_main">📧 PASO 1: Tu correo de HiveUtils</label>
+    <label for="email_main">Confirma tu correo de HiveUtils</label>
     <input type="email" id="email_main" placeholder="tu-usuario@gmail.com" required>
-    <div id="email_error">⚠️ Introduce un correo válido para continuar</div>
+    <div id="email_error">⚠️ Formato de correo inválido</div>
 </div>
 
 <div class="pricing-grid">
     <div class="card">
-        <div class="plan-name">Mensual</div>
-        <div class="plan-price">$4<span>/mes</span></div>
-        <div class="plan-info">30 Días de Acceso</div>
-        <button class="btn-pay-crypto" onclick="processCryptoPayment(4, 'HiveUtils PRO: 1 Mes', this)">Pagar con Crypto 🪙</button>
+        <img src="plan-1-mes.png" alt="PLAN 1 MES" class="plan-image">
+        <button class="btn-pay-crypto" onclick="processCryptoPayment(4, 'HiveUtils PRO: 1 Mes', this)">
+            Pagar con Crypto 🪙
+        </button>
     </div>
 
     <div class="card">
-        <div class="plan-name">Trimestral</div>
-        <div class="plan-price">$10<span>/3m</span></div>
-        <div class="plan-info">90 Días de Acceso</div>
-        <button class="btn-pay-crypto" onclick="processCryptoPayment(10, 'HiveUtils PRO: 3 Meses', this)">Pagar con Crypto 🪙</button>
+        <img src="plan-3-meses.png" alt="PLAN 3 MESES" class="plan-image">
+        <button class="btn-pay-crypto" onclick="processCryptoPayment(10, 'HiveUtils PRO: 3 Meses', this)">
+            Pagar con Crypto 🪙
+        </button>
     </div>
 
     <div class="card">
-        <div class="plan-name">Semestral</div>
-        <div class="plan-price">$18<span>/6m</span></div>
-        <div class="plan-info">180 Días de Acceso</div>
-        <button class="btn-pay-crypto" onclick="processCryptoPayment(18, 'HiveUtils PRO: 6 Meses', this)">Pagar con Crypto 🪙</button>
+        <img src="plan-6-meses.png" alt="PLAN 6 MESES" class="plan-image">
+        <button class="btn-pay-crypto" onclick="processCryptoPayment(18, 'HiveUtils PRO: 6 Meses', this)">
+            Pagar con Crypto 🪙
+        </button>
     </div>
 
     <div class="card popular">
         <div class="popular-tag">¡Más Ahorro!</div>
-        <div class="plan-name">Anual</div>
-        <div class="plan-price">$30<span>/año</span></div>
-        <div class="plan-info">365 Días de Acceso</div>
-        <button class="btn-pay-crypto" onclick="processCryptoPayment(30, 'HiveUtils PRO: 1 Año', this)">Pagar con Crypto 🪙</button>
+        <img src="plan-anual.png" alt="PLAN ANUAL" class="plan-image">
+        <button class="btn-pay-crypto" onclick="processCryptoPayment(30, 'HiveUtils PRO: 1 Año', this)">
+            Pagar con Crypto 🪙
+        </button>
     </div>
 </div>
 
 <div class="legal-notice">
-    <strong>Aviso legal:</strong> Los precios de los activos digitales están sujetos a un alto riesgo de mercado y volatilidad. Este material no debe interpretarse como asesoría financiera.
-    <p style="text-align: center; margin-top: 20px; font-size: 10px;">© 2026 CHEVIROACH AI Team - Todos los derechos reservados.</p>
+    <strong>Aviso legal:</strong> Los precios de los activos digitales están sujetos a un alto riesgo de mercado y volatilidad.<br>
+    © 2026 CHEVIROACH AI Team
 </div>
 
 <script>
@@ -225,11 +281,11 @@
         
         if(!regex.test(email)) {
             error.style.display = 'block';
-            document.getElementById('email_main').style.borderColor = '#e53e3e';
+            document.getElementById('email_main').style.borderColor = 'var(--danger)';
             return null;
         }
         error.style.display = 'none';
-        document.getElementById('email_main').style.borderColor = '#38a169';
+        document.getElementById('email_main').style.borderColor = '#0ECB81';
         return email;
     }
 
@@ -245,32 +301,22 @@
         btnElement.disabled = true;
 
         try {
-            // AHORA LLAMAS A TU PROPIO SERVIDOR EN SUPABASE
             const response = await fetch("https://kykbnqqdfhzzdtkpdwuy.supabase.co/functions/v1/create-invoice", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    amount: amount,
-                    description: description,
-                    email: email
-                })
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ amount: amount, description: description, email: email })
             });
 
             const data = await response.json();
 
-            // Si Supabase devuelve el link, rediriges
             if (data.invoice_url) {
                 window.location.href = data.invoice_url;
             } else {
-                console.error("Error del servidor de Supabase:", data);
                 alert("Error al generar factura. Verifica tu conexión.");
                 btnElement.innerHTML = originalText;
                 btnElement.disabled = false;
             }
         } catch (error) {
-            console.error("Error de Red/Fetch:", error);
             alert("Error de conexión con el servidor.");
             btnElement.innerHTML = originalText;
             btnElement.disabled = false;
