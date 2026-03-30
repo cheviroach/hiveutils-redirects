@@ -133,7 +133,12 @@
         .plan-price { font-size: 42px; font-weight: 800; color: #1a202c; }
         .plan-price span { font-size: 16px; color: #a0aec0; }
 
+        /* --- ACTUALIZACIÓN DEL CSS DEL BOTÓN --- */
         .btn-pay-crypto {
+            display: flex; /* Para alinear texto e icono */
+            justify-content: center;
+            align-items: center;
+            gap: 12px; /* Espacio entre texto e icono */
             background-color: var(--binance-yellow);
             color: var(--binance-dark);
             border: none;
@@ -145,6 +150,13 @@
             cursor: pointer;
             transition: all 0.3s ease;
             margin-top: 20px;
+        }
+
+        /* Estilo para el logo SVG dentro del botón */
+        .binance-icon {
+            height: 22px; /* Ajusta el tamaño para alinearse con el texto negrita */
+            width: auto;
+            display: block;
         }
 
         .btn-pay-crypto:hover { 
@@ -189,21 +201,28 @@
         <div class="plan-name">Mensual</div>
         <div class="plan-price">$4<span>/mes</span></div>
         <div class="plan-info">30 Días de Acceso</div>
-        <button class="btn-pay-crypto" onclick="processZenoPayment(4, 'HiveUtils PRO: 1 Mes', this)">Pagar con Binance Pay 🟨</button>
+        <button class="btn-pay-crypto" onclick="processZenoPayment(4, 'HiveUtils PRO: 1 Mes', this)">
+            Pagar con Binance Pay <img src="https://upload.wikimedia.org/wikipedia/commons/e/ee/Binance_logo_diamond.svg" class="binance-icon" alt="Logo Binance">
+        </button>
     </div>
 
     <div class="card">
         <div class="plan-name">Trimestral</div>
         <div class="plan-price">$10<span>/3m</span></div>
         <div class="plan-info">90 Días de Acceso</div>
-        <button class="btn-pay-crypto" onclick="processZenoPayment(10, 'HiveUtils PRO: 3 Meses', this)">Pagar con Binance Pay 🟨</button>
+        <button class="btn-pay-crypto" onclick="processZenoPayment(10, 'HiveUtils PRO: 3 Meses', this)">
+            Pagar con Binance Pay <img src="https://upload.wikimedia.org/wikipedia/commons/e/ee/Binance_logo_diamond.svg" class="binance-icon" alt="Logo Binance">
+        </button>
     </div>
 
     <div class="card">
         <div class="plan-name">Semestral</div>
+        <div class="plan-name">Semestral</div>
         <div class="plan-price">$18<span>/6m</span></div>
         <div class="plan-info">180 Días de Acceso</div>
-        <button class="btn-pay-crypto" onclick="processZenoPayment(18, 'HiveUtils PRO: 6 Meses', this)">Pagar con Binance Pay 🟨</button>
+        <button class="btn-pay-crypto" onclick="processZenoPayment(18, 'HiveUtils PRO: 6 Meses', this)">
+            Pagar con Binance Pay <img src="https://upload.wikimedia.org/wikipedia/commons/e/ee/Binance_logo_diamond.svg" class="binance-icon" alt="Logo Binance">
+        </button>
     </div>
 
     <div class="card popular">
@@ -211,7 +230,9 @@
         <div class="plan-name">Anual</div>
         <div class="plan-price">$30<span>/año</span></div>
         <div class="plan-info">365 Días de Acceso</div>
-        <button class="btn-pay-crypto" onclick="processZenoPayment(30, 'HiveUtils PRO: 1 Año', this)">Pagar con Binance Pay 🟨</button>
+        <button class="btn-pay-crypto" onclick="processZenoPayment(30, 'HiveUtils PRO: 1 Año', this)">
+            Pagar con Binance Pay <img src="https://upload.wikimedia.org/wikipedia/commons/e/ee/Binance_logo_diamond.svg" class="binance-icon" alt="Logo Binance">
+        </button>
     </div>
 </div>
 
@@ -238,7 +259,6 @@
 
     async function processZenoPayment(amount, description, btnElement) {
         const email = validateAndGetEmail();
-        // Si no hay email válido, detiene el proceso y avisa
         if (!email) {
             document.getElementById('email_main').scrollIntoView({ behavior: 'smooth', block: 'center' });
             return;
@@ -249,7 +269,7 @@
         btnElement.disabled = true;
 
         try {
-            const response = await fetch("https://kykbnqqdfhzzdtkpdwuy.supabase.co/functions/v1/create-zeno-invoice", {
+            const response = await fetch("https://kykbnqqdfhzzdtkpdwuy.supabaseco.functions/v1/create-zeno-invoice", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ amount: amount, description: description, email: email })
@@ -258,7 +278,6 @@
             const data = await response.json();
 
             if (data.checkoutUrl) {
-                // Éxito: Redirigimos al usuario a la pantalla de pago de Zeno Bank
                 window.location.href = data.checkoutUrl; 
             } else {
                 console.error("Error al generar link de Zeno:", data);
