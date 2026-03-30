@@ -281,7 +281,7 @@
         btnElement.disabled = true;
 
         try {
-            const response = await fetch("https://kykbnqqdfhzzdtkpdwuy.supabaseco.functions/v1/create-zeno-invoice", {
+            const response = await fetch("https://kykbnqqdfhzzdtkpdwuy.supabase.co/functions/v1/create-zeno-invoice", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ amount: amount, description: description, email: email })
