@@ -3,24 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Membresía Elite Crypto | HiveUtils PRO</title>
+    <title>Membresía Elite Crypto | HIVEUTILS PRO AI</title>
     <style>
         :root {
-            --gold: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
-            /* Colores oficiales de Binance */
+            /* Paleta Premium Dark Crypto */
+            --bg-main: #0B0E11;
+            --bg-card: #181A20;
+            --text-primary: #EAECEF;
+            --text-secondary: #848E9C;
+            --border-color: #2B3139;
             --binance-yellow: #FCD535;
             --binance-dark: #1E2329;
-            --binance-hover: #E5C02B;
-            --soft-gray: #f4f7f9;
-            --danger: #e53e3e;
+            --gold-gradient: linear-gradient(135deg, #FCD535 0%, #F39C12 100%);
+            --danger: #F6465D;
         }
 
         body {
             font-family: 'Inter', -apple-system, system-ui, sans-serif;
-            background-color: var(--soft-gray);
+            background-color: var(--bg-main);
             margin: 0;
             padding: 40px 10px;
-            color: #333;
+            color: var(--text-primary);
         }
 
         .header-section {
@@ -28,153 +31,192 @@
             margin-bottom: 40px;
         }
 
-        .pro-badge {
-            background: var(--gold);
-            color: white;
-            padding: 2px 10px;
-            border-radius: 6px;
-            font-size: 0.6em;
-            vertical-align: middle;
+        .header-section h1 {
+            color: var(--text-primary);
+            font-size: 2.2rem;
+            margin-bottom: 10px;
         }
 
+        .header-section p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .pro-badge {
+            background: var(--gold-gradient);
+            color: var(--binance-dark);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 0.5em;
+            vertical-align: middle;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            box-shadow: 0 0 15px rgba(252, 213, 53, 0.3);
+        }
+
+        /* --- SINCRONIZACIÓN PERFECTA DE LOGOS SUPERIORES --- */
         .wallet-logos {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 25px;
-            margin-top: 15px;
+            gap: 30px;
+            margin-top: 25px;
             flex-wrap: wrap;
         }
 
         .wallet-logos img {
-            height: 56px;
-            object-fit: contain;
-            opacity: 0.9;
+            height: 40px; /* Altura estricta para que todos sean iguales */
+            width: auto;
+            max-width: 150px;
+            object-fit: contain; /* Evita que se deformen */
+            opacity: 0.7;
             transition: all 0.3s ease;
+            filter: grayscale(100%) brightness(200%); /* Los hace ver plateados/elegantes */
         }
 
         .wallet-logos img:hover {
             opacity: 1;
-            transform: scale(1.15);
+            transform: scale(1.1);
+            filter: grayscale(0%) brightness(100%); /* Recuperan su color al pasar el mouse */
         }
 
         .email-container {
             max-width: 450px;
             margin: 0 auto 40px;
             text-align: center;
-            background: white;
-            padding: 25px;
-            border-radius: 24px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border: 2px solid var(--binance-yellow);
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .email-container label {
             display: block;
-            font-weight: 800;
-            margin-bottom: 12px;
-            color: #1a1a1a;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-primary);
             font-size: 1.1rem;
         }
 
         #email_main {
             width: 100%;
-            padding: 15px;
-            border: 2px solid #e2e8f0;
+            padding: 16px;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
             border-radius: 12px;
-            font-size: 18px;
+            font-size: 16px;
             box-sizing: border-box;
             transition: all 0.3s ease;
             text-align: center;
-            font-weight: bold;
         }
 
         #email_main:focus {
             outline: none;
             border-color: var(--binance-yellow);
-            box-shadow: 0 0 0 4px rgba(252, 213, 53, 0.15);
+            box-shadow: 0 0 0 3px rgba(252, 213, 53, 0.15);
         }
+
+        #email_main::placeholder { color: var(--text-secondary); }
 
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
             max-width: 1200px;
             margin: 0 auto 40px;
         }
 
         .card {
-            background: white;
+            background: var(--bg-card);
             border-radius: 24px;
-            padding: 30px 20px;
+            padding: 25px;
             text-align: center;
             position: relative;
-            transition: all 0.3s ease;
-            border: 1px solid #e2e8f0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+            justify-content: space-between;
         }
 
-        .card.popular { border: 2px solid var(--binance-yellow); background: #fffdf5; }
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--binance-yellow);
+            box-shadow: 0 15px 35px rgba(252, 213, 53, 0.1);
+        }
+
+        .card.popular { border: 1px solid var(--binance-yellow); }
+        
         .popular-tag {
             position: absolute;
-            top: -12px;
+            top: -14px;
             left: 50%;
             transform: translateX(-50%);
-            background: var(--gold);
-            color: white;
-            padding: 4px 15px;
+            background: var(--gold-gradient);
+            color: var(--binance-dark);
+            padding: 5px 18px;
             border-radius: 20px;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 800;
+            z-index: 2;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
-        .plan-price { font-size: 42px; font-weight: 800; color: #1a202c; }
-        .plan-price span { font-size: 16px; color: #a0aec0; }
+        /* --- SINCRONIZACIÓN DE IMÁGENES DE PLANES --- */
+        .plan-image {
+            width: 100%;
+            height: 140px; /* Altura fija obligatoria */
+            object-fit: contain; /* Las imágenes se ajustarán sin cortarse ni estirarse */
+            margin-bottom: 25px;
+            transition: transform 0.3s ease;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.4));
+        }
 
-        /* --- ACTUALIZACIÓN DEL CSS DEL BOTÓN --- */
+        .card:hover .plan-image { transform: scale(1.05); }
+
+        /* --- SINCRONIZACIÓN DEL BOTÓN Y LOGO --- */
         .btn-pay-crypto {
-            display: flex; /* Para alinear texto e icono */
+            display: flex;
             justify-content: center;
             align-items: center;
-            gap: 12px; /* Espacio entre texto e icono */
+            gap: 10px;
             background-color: var(--binance-yellow);
             color: var(--binance-dark);
             border: none;
-            padding: 15px 0;
+            padding: 16px 0;
             width: 100%;
-            border-radius: 50px;
+            border-radius: 12px;
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 800;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-top: 20px;
+            margin-top: auto;
         }
 
-        /* Estilo para el logo SVG dentro del botón */
         .binance-icon {
-            height: 20px; 
-            width: 20px;
+            height: 22px; 
+            width: 22px;
             display: block;
-            fill: var(--binance-dark); /* Toma el color oscuro del texto */
+            fill: var(--binance-dark);
+            flex-shrink: 0; /* Evita que el logo se aplaste */
         }
 
         .btn-pay-crypto:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 5px 15px rgba(252, 213, 53, 0.4); 
-            background-color: var(--binance-hover);
+            background-color: #f0c822;
+            box-shadow: 0 0 20px rgba(252, 213, 53, 0.3);
         }
 
         .legal-notice {
             max-width: 850px;
             margin: 60px auto 20px;
             padding: 30px;
-            border-top: 1px solid #cbd5e0;
-            color: #718096;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
             font-size: 12px;
             line-height: 1.7;
-            text-align: justify;
+            text-align: center;
         }
 
         #email_error { color: var(--danger); display: none; margin-top: 10px; font-weight: 600; }
@@ -184,26 +226,26 @@
 
 <div class="header-section">
     <h1>HiveUtils <span class="pro-badge">PRO</span></h1>
-    <p>Pago ultra rápido y seguro con Binance Pay</p>
+    <p>Infraestructura de pagos Elite impulsada por Binance Pay</p>
     
     <div class="wallet-logos">
         <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Binance_Logo.svg" alt="Binance Pay">
+        <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/825.png" alt="USDT">
     </div>
 </div>
 
 <div class="email-container">
-    <label for="email_main">📧 PASO 1: Tu correo de HiveUtils</label>
+    <label for="email_main">Confirma tu correo de HiveUtils</label>
     <input type="email" id="email_main" placeholder="tu-usuario@gmail.com" required>
-    <div id="email_error">⚠️ Introduce un correo válido para continuar</div>
+    <div id="email_error">⚠️ Formato de correo inválido</div>
 </div>
 
 <div class="pricing-grid">
     <div class="card">
-        <div class="plan-name">Mensual</div>
-        <div class="plan-price">$4<span>/mes</span></div>
-        <div class="plan-info">30 Días de Acceso</div>
-        <button class="btn-pay-crypto" onclick="processZenoPayment(4, 'HiveUtils PRO: 1 Mes', this)">
-            Pagar con Binance Pay 
+        <div class="card">
+        <img src="plan-1-mes.png" alt="PLAN 1 MES" class="plan-image">
+        <button class="btn-pay-crypto" onclick="processZenoPayment(4, 'HiveUtils PRO: 1 Mes', this)">...
+            Pagar con BINANCE PAY 
             <svg class="binance-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12.0003 4.96541L15.3087 8.27387L17.5192 6.06338L12.0003 0.544434L6.48132 6.06338L8.69186 8.27387L12.0003 4.96541ZM4.27083 8.27387L0.962402 11.5823L4.27083 14.8907L6.48132 12.6802L4.27083 10.4697L6.48132 8.27387H4.27083ZM19.7297 8.27387L17.5192 10.4697L19.7297 12.6802L21.9402 10.4697L19.7297 8.27387ZM12.0003 19.0345L8.69186 15.7261L6.48132 17.9365L12.0003 23.4555L17.5192 17.9365L15.3087 15.7261L12.0003 19.0345ZM12.0003 9.37895L9.78985 11.5894L12.0003 13.7999L14.2108 11.5894L12.0003 9.37895Z"/>
             </svg>
@@ -211,11 +253,10 @@
     </div>
 
     <div class="card">
-        <div class="plan-name">Trimestral</div>
-        <div class="plan-price">$10<span>/3m</span></div>
-        <div class="plan-info">90 Días de Acceso</div>
-        <button class="btn-pay-crypto" onclick="processZenoPayment(10, 'HiveUtils PRO: 3 Meses', this)">
-            Pagar con Binance Pay 
+        <div class="card">
+        <img src="plan-3-meses.png" alt="PLAN 3 MESES" class="plan-image">
+        <button class="btn-pay-crypto" onclick="processZenoPayment(10, 'HiveUtils PRO: 3 Meses', this)">...
+            Pagar con BINANCE PAY
             <svg class="binance-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12.0003 4.96541L15.3087 8.27387L17.5192 6.06338L12.0003 0.544434L6.48132 6.06338L8.69186 8.27387L12.0003 4.96541ZM4.27083 8.27387L0.962402 11.5823L4.27083 14.8907L6.48132 12.6802L4.27083 10.4697L6.48132 8.27387H4.27083ZM19.7297 8.27387L17.5192 10.4697L19.7297 12.6802L21.9402 10.4697L19.7297 8.27387ZM12.0003 19.0345L8.69186 15.7261L6.48132 17.9365L12.0003 23.4555L17.5192 17.9365L15.3087 15.7261L12.0003 19.0345ZM12.0003 9.37895L9.78985 11.5894L12.0003 13.7999L14.2108 11.5894L12.0003 9.37895Z"/>
             </svg>
@@ -223,11 +264,10 @@
     </div>
 
     <div class="card">
-        <div class="plan-name">Semestral</div>
-        <div class="plan-price">$18<span>/6m</span></div>
-        <div class="plan-info">180 Días de Acceso</div>
-        <button class="btn-pay-crypto" onclick="processZenoPayment(18, 'HiveUtils PRO: 6 Meses', this)">
-            Pagar con Binance Pay 
+        <div class="card">
+        <img src="plan-6-meses.png" alt="PLAN 6 MESES" class="plan-image">
+        <button class="btn-pay-crypto" onclick="processZenoPayment(18, 'HiveUtils PRO: 6 Meses', this)">...
+            Pagar con BINANCE PAY 
             <svg class="binance-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12.0003 4.96541L15.3087 8.27387L17.5192 6.06338L12.0003 0.544434L6.48132 6.06338L8.69186 8.27387L12.0003 4.96541ZM4.27083 8.27387L0.962402 11.5823L4.27083 14.8907L6.48132 12.6802L4.27083 10.4697L6.48132 8.27387H4.27083ZM19.7297 8.27387L17.5192 10.4697L19.7297 12.6802L21.9402 10.4697L19.7297 8.27387ZM12.0003 19.0345L8.69186 15.7261L6.48132 17.9365L12.0003 23.4555L17.5192 17.9365L15.3087 15.7261L12.0003 19.0345ZM12.0003 9.37895L9.78985 11.5894L12.0003 13.7999L14.2108 11.5894L12.0003 9.37895Z"/>
             </svg>
@@ -235,12 +275,11 @@
     </div>
 
     <div class="card popular">
-        <div class="popular-tag">¡Más Ahorro!</div>
-        <div class="plan-name">Anual</div>
-        <div class="plan-price">$30<span>/año</span></div>
-        <div class="plan-info">365 Días de Acceso</div>
-        <button class="btn-pay-crypto" onclick="processZenoPayment(30, 'HiveUtils PRO: 1 Año', this)">
-            Pagar con Binance Pay 
+       <div class="card popular">
+        <div class="popular-tag">¡Recomendado!</div>
+        <img src="plan-anual.png" alt="PLAN ANUAL" class="plan-image">
+        <button class="btn-pay-crypto" onclick="processZenoPayment(30, 'HiveUtils PRO: 1 Año', this)">...
+            Pagar con BINANCE PAY 
             <svg class="binance-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12.0003 4.96541L15.3087 8.27387L17.5192 6.06338L12.0003 0.544434L6.48132 6.06338L8.69186 8.27387L12.0003 4.96541ZM4.27083 8.27387L0.962402 11.5823L4.27083 14.8907L6.48132 12.6802L4.27083 10.4697L6.48132 8.27387H4.27083ZM19.7297 8.27387L17.5192 10.4697L19.7297 12.6802L21.9402 10.4697L19.7297 8.27387ZM12.0003 19.0345L8.69186 15.7261L6.48132 17.9365L12.0003 23.4555L17.5192 17.9365L15.3087 15.7261L12.0003 19.0345ZM12.0003 9.37895L9.78985 11.5894L12.0003 13.7999L14.2108 11.5894L12.0003 9.37895Z"/>
             </svg>
@@ -249,8 +288,8 @@
 </div>
 
 <div class="legal-notice">
-    <strong>Aviso legal:</strong> Los pagos son procesados de forma segura a través de la infraestructura de Zeno Bank (Binance Pay). Al proceder con el pago, aceptas los términos de la membresía.
-    <p style="text-align: center; margin-top: 20px; font-size: 10px;">© 2026 CHEVIROACH AI Team - Todos los derechos reservados.</p>
+    <strong>Aviso de Seguridad:</strong> Todas las transacciones son procesadas encriptadas de extremo a extremo por Zeno Bank.<br>
+    © 2026 CHEVIROACH AI Team
 </div>
 
 <script>
@@ -261,11 +300,11 @@
         
         if(!regex.test(email)) {
             error.style.display = 'block';
-            document.getElementById('email_main').style.borderColor = '#e53e3e';
+            document.getElementById('email_main').style.borderColor = 'var(--danger)';
             return null;
         }
         error.style.display = 'none';
-        document.getElementById('email_main').style.borderColor = '#38a169';
+        document.getElementById('email_main').style.borderColor = '#0ECB81'; /* Verde Binance éxito */
         return email;
     }
 
@@ -277,8 +316,9 @@
         }
 
         const originalText = btnElement.innerHTML;
-        btnElement.innerHTML = "Conectando con Binance... ⏳";
+        btnElement.innerHTML = "Generando Orden... ⏳";
         btnElement.disabled = true;
+        btnElement.style.opacity = "0.7";
 
         try {
             const response = await fetch("https://kykbnqqdfhzzdtkpdwuy.supabase.co/functions/v1/create-zeno-invoice", {
@@ -293,15 +333,17 @@
                 window.location.href = data.checkoutUrl; 
             } else {
                 console.error("Error al generar link de Zeno:", data);
-                alert("Error al conectar con Binance Pay. Revisa la consola para más detalles.");
+                alert("Error al conectar con Binance Pay. Intenta de nuevo.");
                 btnElement.innerHTML = originalText;
                 btnElement.disabled = false;
+                btnElement.style.opacity = "1";
             }
         } catch (error) {
             console.error("Error de Red/Fetch:", error);
-            alert("Error de conexión con el servidor. Intenta de nuevo.");
+            alert("Error de conexión con el servidor.");
             btnElement.innerHTML = originalText;
             btnElement.disabled = false;
+            btnElement.style.opacity = "1";
         }
     }
 </script>
